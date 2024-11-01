@@ -1,0 +1,6 @@
+.venv/
+app/__pycache__/
+app/backend/__pycache__/
+app/migrations/__pycache__/
+app/models/__pycache__/
+app/routers/__pycache__/
