@@ -1,6 +1,6 @@
 from app.backend.db import Base
 from sqlalchemy import Column, Integer, String, ForeignKey, Boolean
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, Mapped
 from app.models import *
 
 
@@ -13,7 +13,7 @@ class User(Base):
     age = Column(Integer)
     slug = Column(String, unique=True, index=True)
 
-    tasks = relationship("Task", back_populates='user')
+    tasks: Mapped["Task"] = relationship()
 
 
 #from sqlalchemy.schema import CreateTable
