@@ -30,7 +30,7 @@ async def user_by_id(db: Annotated[Session, Depends(get_db)], user_id: int):
     if not user:
         return HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail='User was not found"'
+            detail='User was not found'
         )
     return user
 

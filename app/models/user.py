@@ -1,19 +1,22 @@
 from app.backend.db import Base
-from sqlalchemy import Column, Integer, String, ForeignKey, Boolean
-from sqlalchemy.orm import relationship, Mapped
-from app.models import *
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import relationship
 
 
 class User(Base):
     __tablename__ = "users"
-    id = Column(Integer, primary_key=True, index=True)
+    __table_arg__ = {'extend_existing': True}
+    id = Column(Integer, primary_key=True, index=True, unique=True)
     username = Column(String)
     firstname = Column(String)
     lastname = Column(String)
     age = Column(Integer)
     slug = Column(String, unique=True, index=True)
 
-    tasks: Mapped["Task"] = relationship()
+    tasks = relationship("Task",
+                         backref="user",
+                         cascade="all, delete",
+                         passive_deletes=True)
 
 
 #from sqlalchemy.schema import CreateTable
