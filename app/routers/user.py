@@ -79,14 +79,14 @@ async def update_user(db: Annotated[Session, Depends(get_db)],
 
 @router.delete('/delete')
 async def delete_user(db: Annotated[Session, Depends(get_db)],
-                      user_id: int):
-    user_update = db.scalar(select(User).where(User.id == user_id))
-    if user_update is None:
+                      del_id: int):
+    user_del = db.scalar(select(User).where(User.id == del_id))
+    if user_del is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="User was not found"
         )
-    db.execute(delete(User).where(User.id == user_id))
+    db.execute(delete(User).where(User.id == del_id))
     db.commit()
     return {
         'status_code': status.HTTP_200_OK,
